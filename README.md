@@ -2,7 +2,7 @@
 cli interface to pihole api
 
 
-**Need to set env var PIPWHASH to WEBPASSWORD in /etc/pihole/setupVars.conf**
+**Need to set env var PIPWHASH to WEBPASSWORD as found on your pihole in /etc/pihole/setupVars.conf**
 
 
 # TODO
