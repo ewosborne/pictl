@@ -18,7 +18,6 @@ var disableCmd = &cobra.Command{
 		d, _ := cmd.Flags().GetInt("delay")
 
 		if d == 0 {
-			// this is a shit way to do it.
 			core.Picmd(core.Toggle{Command: "disable"})
 		} else {
 			core.Picmd(core.Toggle{Command: "disable", Delay: fmt.Sprint(d)})
