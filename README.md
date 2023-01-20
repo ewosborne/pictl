@@ -6,14 +6,12 @@ cli interface to pihole api
 
 
 # TODO
-```
-docs
-more args
--v / -d verbose and debug flags
-cli arg to override pi.hole hostname
-error checking!
-probably a Makefile
-```
+* docs
+* more args
+* -v / -d verbose and debug flags
+* cli arg to override pi.hole hostname
+* error checking!
+* probably a Makefile
 
 # EXAMPLES
 ```
