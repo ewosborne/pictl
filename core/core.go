@@ -40,7 +40,7 @@ func Picmd(cmd Toggle) {
 		log.Fatal(err)
 	}
 
-	fmt.Println(resp.Status)
+	//fmt.Println(resp.Status)
 	fmt.Println(string(responseBody))
 
 }
