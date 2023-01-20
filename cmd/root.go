@@ -11,11 +11,13 @@ import (
 )
 
 var Verbose bool
+var Version = "1.0.0"
 
 // rootCmd represents the base command when called without any subcommands
 var rootCmd = &cobra.Command{
-	Use:  "pictl",
-	Long: `pictl is a CLI tool to interact with your pi.hole API.`,
+	Use:     "pictl",
+	Long:    `pictl is a CLI tool to interact with your pi.hole API.`,
+	Version: Version,
 }
 
 // Execute adds all child commands to the root command and sets flags appropriately.
