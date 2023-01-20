@@ -5,6 +5,7 @@ No header.
 package cmd
 
 import (
+	"fmt"
 	"github.com/spf13/cobra"
 	"pictl/core"
 )
@@ -12,11 +13,16 @@ import (
 // disableCmd represents the disable command
 var disableCmd = &cobra.Command{
 	Use:   "disable [{-d | --delay} time]",
-	Short: "Disable adblocking. Optional time parameter; default is permanent disable.",
+	Short: "Disable adblocking. Optional time parameter.",
 	Run: func(cmd *cobra.Command, args []string) {
-		d, _ := cmd.Flags().GetString("delay")
-		core.Picmd(core.Toggle{Command: "disable", Delay: string(d)})
+		d, _ := cmd.Flags().GetInt("delay")
 
+		if d == 0 {
+			// this is a shit way to do it.
+			core.Picmd(core.Toggle{Command: "disable"})
+		} else {
+			core.Picmd(core.Toggle{Command: "disable", Delay: fmt.Sprint(d)})
+		}
 	},
 }
 

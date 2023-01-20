@@ -12,6 +12,7 @@ cli interface to pihole api
 * cli arg to override pi.hole hostname
 * error checking!
 * probably a Makefile
+* should probably have some tests I guess
 
 # EXAMPLES
 ```
