@@ -13,8 +13,6 @@ type Toggle struct {
 	Delay   string
 }
 
-// http://pi.hole/admin/api.php?disable=300&auth=PWHASH 470
-
 func Picmd(cmd Toggle) {
 	fmt.Println("cmd", cmd.Command, cmd.Delay)
 	client := &http.Client{}
