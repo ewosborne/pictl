@@ -19,15 +19,19 @@ probably a Makefile
 eric@air pictl % pictl status
 200 OK
 {"status":"disabled"}
+
 eric@air pictl % pictl enable
 200 OK
 {"status":"enabled"}
+
 eric@air pictl % pictl status
 200 OK
 {"status":"enabled"}
+
 eric@air pictl % pictl disable
 200 OK
 {"status":"disabled"}
+
 eric@air pictl % pictl disable -d 35
 200 OK
 {"status":"disabled"}
