@@ -12,3 +12,6 @@ more args
 cli arg to override pi.hole hostname
 error checking!
 probably a Makefile
+
+
+# EXAMPLES

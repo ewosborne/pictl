@@ -14,7 +14,6 @@ type Toggle struct {
 }
 
 func Picmd(cmd Toggle) {
-	fmt.Println("cmd", cmd.Command, cmd.Delay)
 	client := &http.Client{}
 	req, err := http.NewRequest(http.MethodGet, "http://pi.hole/admin/api.php", nil)
 	if err != nil {
@@ -28,8 +27,6 @@ func Picmd(cmd Toggle) {
 
 	// assign encoded query string to http request
 	req.URL.RawQuery = q.Encode()
-
-	fmt.Println("query", req.URL.Host, req.URL.Path, req.URL.RawQuery)
 
 	resp, err := client.Do(req)
 	if err != nil {
