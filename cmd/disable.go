@@ -27,5 +27,5 @@ var disableCmd = &cobra.Command{
 
 func init() {
 	rootCmd.AddCommand(disableCmd)
-	disableCmd.Flags().IntP("delay", "d", 0, "temp time delay")
+	disableCmd.Flags().IntP("delay", "d", 0, "disable time in seconds")
 }
