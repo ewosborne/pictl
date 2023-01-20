@@ -13,6 +13,7 @@ cli interface to pihole api
 * error checking!
 * probably a Makefile
 * should probably have some tests I guess
+* catch "pictl disable 42" as an incorrect use of "pictl disable -d 42"
 
 # EXAMPLES
 ```
