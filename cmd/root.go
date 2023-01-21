@@ -10,9 +10,7 @@ import (
 	"github.com/spf13/cobra"
 )
 
-var Verbose bool
-var Version = "0.0.9"
-var Host string
+var Version = "0.0.10"
 
 // rootCmd represents the base command when called without any subcommands
 var rootCmd = &cobra.Command{
@@ -32,6 +30,6 @@ func Execute() {
 }
 
 func init() {
-	rootCmd.PersistentFlags().BoolVarP(&Verbose, "verbose", "v", false, "verbose output")
-	rootCmd.PersistentFlags().StringVarP(&Host, "host", "", "pi.hole", "host to reach")
+	rootCmd.PersistentFlags().BoolP("verbose", "v", false, "verbose output")
+	rootCmd.PersistentFlags().StringP("host", "", "pi.hole", "host to reach")
 }

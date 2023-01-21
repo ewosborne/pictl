@@ -16,19 +16,19 @@ type Toggle struct {
 	Command string
 	Delay   int
 	Host    string
+	Verbose bool
 }
 
 func NewToggle(cmd *cobra.Command, command string) Toggle {
 	// TODO: check for errors and handle them
 	host, _ := cmd.Flags().GetString("host")
 	d, _ := cmd.Flags().GetInt("delay")
-	slog.Info(fmt.Sprintf("delay is %d", d))
-	return Toggle{Host: host, Delay: d, Command: command}
+	verbose, _ := cmd.Flags().GetBool("verbose")
+	return Toggle{Host: host, Delay: d, Command: command, Verbose: verbose}
 }
 
 func Picmd(cmd Toggle) {
-	slog.Info("in picmd")
-	slog.Info(cmd.Host)
+	//verbose, _ := cmd.Flags().GetBool("verbose")
 	reqstr := fmt.Sprintf("http://%s/admin/api.php", cmd.Host)
 	client := &http.Client{}
 	req, err := http.NewRequest(http.MethodGet, reqstr, nil)
@@ -43,7 +43,10 @@ func Picmd(cmd Toggle) {
 
 	// assign encoded query string to http request
 	req.URL.RawQuery = q.Encode()
-	slog.Info(req.URL.String())
+
+	if cmd.Verbose == true {
+		slog.Info(req.URL.String())
+	}
 
 	resp, err := client.Do(req)
 	if err != nil {
