@@ -2,6 +2,7 @@ package core
 
 import (
 	"fmt"
+	"golang.org/x/exp/slog"
 	"io/ioutil"
 	"log"
 	"net/http"
@@ -11,11 +12,19 @@ import (
 type Toggle struct {
 	Command string
 	Delay   string
+	Host    string
+}
+
+func NewToggle() Toggle {
+	return Toggle{Host: "pi.hole"}
 }
 
 func Picmd(cmd Toggle) {
+	slog.Info("in picmd")
+	slog.Info(cmd.Host)
+	reqstr := fmt.Sprintf("http://%s/admin/api.php", cmd.Host)
 	client := &http.Client{}
-	req, err := http.NewRequest(http.MethodGet, "http://pi.hole/admin/api.php", nil)
+	req, err := http.NewRequest(http.MethodGet, reqstr, nil)
 	if err != nil {
 		log.Fatal(err)
 	}

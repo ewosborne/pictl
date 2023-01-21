@@ -17,10 +17,14 @@ var disableCmd = &cobra.Command{
 	Run: func(cmd *cobra.Command, args []string) {
 		d, _ := cmd.Flags().GetInt("delay")
 
+		x := core.NewToggle()
+		x.Command = "disable"
+
 		if d == 0 {
-			core.Picmd(core.Toggle{Command: "disable"})
+			core.Picmd(x)
 		} else {
-			core.Picmd(core.Toggle{Command: "disable", Delay: fmt.Sprint(d)})
+			x.Delay = fmt.Sprint(d)
+			core.Picmd(core.Toggle(x))
 		}
 	},
 }
