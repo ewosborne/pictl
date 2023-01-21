@@ -11,7 +11,8 @@ import (
 )
 
 var Verbose bool
-var Version = "1.0.1"
+var Version = "0.0.3"
+var Host string
 
 // rootCmd represents the base command when called without any subcommands
 var rootCmd = &cobra.Command{
@@ -31,7 +32,6 @@ func Execute() {
 }
 
 func init() {
-
 	rootCmd.PersistentFlags().BoolVarP(&Verbose, "verbose", "v", false, "verbose output")
-
+	rootCmd.PersistentFlags().StringVarP(&Host, "host", "", "pi.hole", "host to reach")
 }

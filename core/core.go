@@ -15,8 +15,8 @@ type Toggle struct {
 	Host    string
 }
 
-func NewToggle() Toggle {
-	return Toggle{Host: "pi.hole"}
+func NewToggle(host string) Toggle {
+	return Toggle{Host: host}
 }
 
 func Picmd(cmd Toggle) {

@@ -17,7 +17,9 @@ var disableCmd = &cobra.Command{
 	Run: func(cmd *cobra.Command, args []string) {
 		d, _ := cmd.Flags().GetInt("delay")
 
-		x := core.NewToggle()
+		host, _ := cmd.Flags().GetString("host")
+		x := core.NewToggle(host)
+
 		x.Command = "disable"
 
 		if d == 0 {
