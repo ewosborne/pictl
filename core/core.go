@@ -12,24 +12,32 @@ import (
 	"strconv"
 )
 
-type Toggle struct {
+type CliArgs struct {
 	Command string
 	Delay   int
 	Host    string
 	Verbose bool
 }
 
-func NewToggle(cmd *cobra.Command, command string) Toggle {
-	// TODO: check for errors and handle them
-	host, _ := cmd.Flags().GetString("host")
-	d, _ := cmd.Flags().GetInt("delay")
-	verbose, _ := cmd.Flags().GetBool("verbose")
-	return Toggle{Host: host, Delay: d, Command: command, Verbose: verbose}
+func NewCliArgs(cmd *cobra.Command, command string) CliArgs {
+	host, err := cmd.Flags().GetString("host")
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	// TODO: delay may not be defined.
+	delay, _ := cmd.Flags().GetInt("delay")
+
+	verbose, err := cmd.Flags().GetBool("verbose")
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	return CliArgs{Host: host, Delay: delay, Command: command, Verbose: verbose}
 }
 
-func Picmd(cmd Toggle) {
-	//verbose, _ := cmd.Flags().GetBool("verbose")
-	reqstr := fmt.Sprintf("http://%s/admin/api.php", cmd.Host)
+func Picmd(cliargs CliArgs) {
+	reqstr := fmt.Sprintf("http://%s/admin/api.php", cliargs.Host)
 	client := &http.Client{}
 	req, err := http.NewRequest(http.MethodGet, reqstr, nil)
 	if err != nil {
@@ -37,14 +45,15 @@ func Picmd(cmd Toggle) {
 	}
 
 	// appending to existing query args
+
 	q := req.URL.Query()
 	q.Add("auth", os.Getenv("PIPWHASH"))
-	q.Add(cmd.Command, strconv.Itoa(cmd.Delay))
+	q.Add(cliargs.Command, strconv.Itoa(cliargs.Delay))
 
 	// assign encoded query string to http request
 	req.URL.RawQuery = q.Encode()
 
-	if cmd.Verbose == true {
+	if cliargs.Verbose == true {
 		slog.Info(req.URL.String())
 	}
 

@@ -14,7 +14,7 @@ var disableCmd = &cobra.Command{
 	Use:   "disable [{-d | --delay} time]",
 	Short: "Disable adblocking. Optional time parameter.",
 	Run: func(cmd *cobra.Command, args []string) {
-		core.Picmd(core.NewToggle(cmd, "disable"))
+		core.Picmd(core.NewCliArgs(cmd, "disable"))
 	},
 }
 

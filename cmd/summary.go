@@ -14,7 +14,7 @@ var summaryCmd = &cobra.Command{
 	Use:   "summary",
 	Short: "Get summary from the pihole",
 	Run: func(cmd *cobra.Command, args []string) {
-		core.Picmd(core.NewToggle(cmd, "summaryRaw"))
+		core.Picmd(core.NewCliArgs(cmd, "summaryRaw"))
 	},
 }
 
