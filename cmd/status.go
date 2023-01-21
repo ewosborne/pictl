@@ -14,11 +14,7 @@ var statusCmd = &cobra.Command{
 	Use:   "status",
 	Short: "Get status from pihole",
 	Run: func(cmd *cobra.Command, args []string) {
-		host, _ := cmd.Flags().GetString("host")
-		x := core.NewToggle(host)
-		x.Command = "status"
-		x.Host = host
-		core.Picmd(x)
+		core.Picmd(core.NewToggle(cmd, "status"))
 	},
 }
 

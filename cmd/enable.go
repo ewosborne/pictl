@@ -14,10 +14,7 @@ var enableCmd = &cobra.Command{
 	Use:   "enable",
 	Short: "Enable pihole ad blocking",
 	Run: func(cmd *cobra.Command, args []string) {
-		host, _ := cmd.Flags().GetString("host")
-		x := core.NewToggle(host)
-		x.Command = "enable"
-		core.Picmd(x)
+		core.Picmd(core.NewToggle(cmd, "enable"))
 	},
 }
 

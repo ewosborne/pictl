@@ -11,7 +11,7 @@ import (
 )
 
 var Verbose bool
-var Version = "0.0.3"
+var Version = "0.0.9"
 var Host string
 
 // rootCmd represents the base command when called without any subcommands
