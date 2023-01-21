@@ -13,7 +13,7 @@ import (
 // disableCmd represents the disable command
 var disableCmd = &cobra.Command{
 	Use:   "disable [{-d | --delay} time]",
-	Short: "Disable adblocking. Optional time parameter.",
+	Short: "Disable adblocking.  Optional time parameter.",
 	Run: func(cmd *cobra.Command, args []string) {
 		d, _ := cmd.Flags().GetInt("delay")
 
