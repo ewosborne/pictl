@@ -19,6 +19,11 @@ type CliArgs struct {
 	Verbose bool
 }
 
+func (c CliArgs) String() string {
+	return fmt.Sprintf("Command:%s, Delay:%d, Host:%s, Verbose:%t",
+		c.Command, c.Delay, c.Host, c.Verbose)
+}
+
 func NewCliArgs(cmd *cobra.Command, command string) CliArgs {
 	host, err := cmd.Flags().GetString("host")
 	if err != nil {
@@ -26,7 +31,7 @@ func NewCliArgs(cmd *cobra.Command, command string) CliArgs {
 	}
 
 	// TODO: delay may not be defined.
-	delay, _ := cmd.Flags().GetInt("delay")
+	delay, _ := cmd.Flags().GetInt("time")
 
 	verbose, err := cmd.Flags().GetBool("verbose")
 	if err != nil {
@@ -37,6 +42,10 @@ func NewCliArgs(cmd *cobra.Command, command string) CliArgs {
 }
 
 func Picmd(cliargs CliArgs) {
+	if cliargs.Verbose == true {
+		slog.Info("verbose")
+		fmt.Println(cliargs)
+	}
 	reqstr := fmt.Sprintf("http://%s/admin/api.php", cliargs.Host)
 	client := &http.Client{}
 	req, err := http.NewRequest(http.MethodGet, reqstr, nil)
