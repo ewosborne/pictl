@@ -5,12 +5,13 @@ No header.
 package cmd
 
 import (
+	"golang.org/x/exp/slog"
 	"os"
 
 	"github.com/spf13/cobra"
 )
 
-var Version = "0.0.12"
+var Version = "0.1.0"
 
 // rootCmd represents the base command when called without any subcommands
 var rootCmd = &cobra.Command{
@@ -27,9 +28,21 @@ func Execute() {
 	if err != nil {
 		os.Exit(1)
 	}
+
+	// check rootCmd to see if verbose is set?
+	opts := slog.HandlerOptions{
+		Level: slog.LevelDebug,
+	}
+	textHandler := opts.NewTextHandler(os.Stderr)
+	slog.SetDefault(slog.New(textHandler))
+	verbose, _ := rootCmd.Flags().GetBool("verbose")
+	if verbose == true {
+		print("verbose is on")
+	}
 }
 
 func init() {
+
 	rootCmd.PersistentFlags().BoolP("verbose", "v", false, "verbose output")
 	rootCmd.PersistentFlags().StringP("host", "", "pi.hole", "host to reach")
 }

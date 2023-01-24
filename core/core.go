@@ -25,6 +25,7 @@ func (c CliArgs) String() string {
 }
 
 func NewCliArgs(cmd *cobra.Command, command string) CliArgs {
+	slog.Debug("this is info")
 	host, err := cmd.Flags().GetString("host")
 	if err != nil {
 		log.Fatal(err)
@@ -38,7 +39,11 @@ func NewCliArgs(cmd *cobra.Command, command string) CliArgs {
 		log.Fatal(err)
 	}
 
-	return CliArgs{Host: host, Delay: delay, Command: command, Verbose: verbose}
+	ret := CliArgs{Host: host, Delay: delay, Command: command, Verbose: verbose}
+	if verbose == true {
+		fmt.Println("my args are", ret)
+	}
+	return ret
 }
 
 func Picmd(cliargs CliArgs) {
