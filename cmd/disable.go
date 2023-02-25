@@ -11,7 +11,7 @@ import (
 
 // disableCmd represents the disable command
 var disableCmd = &cobra.Command{
-	Use:   "disable [{-d | --delay} time]",
+	Use:   "disable [{-t | --time} time]",
 	Short: "Disable adblocking. Optional time parameter.",
 	Run: func(cmd *cobra.Command, args []string) {
 		core.Picmd(core.NewCliArgs(cmd, "disable"))
