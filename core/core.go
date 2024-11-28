@@ -7,6 +7,7 @@ import (
 
 	"io/ioutil"
 	"log"
+	//"net"
 	"net/http"
 	"os"
 	"strconv"
@@ -52,6 +53,15 @@ func Picmd(cliargs CliArgs) {
 		fmt.Println(cliargs)
 	}
 	reqstr := fmt.Sprintf("http://%s/admin/api.php", cliargs.Host)
+
+	// forcing ipv4
+	// Create a transport object
+	// transport := &http.Transport{
+	// 	Dial: (&net.Dialer{
+	// 		DualStack: false, // This ensures only IPv4 is used
+	// 	}).Dial,
+	// }
+
 	client := &http.Client{}
 	req, err := http.NewRequest(http.MethodGet, reqstr, nil)
 	if err != nil {
@@ -73,7 +83,7 @@ func Picmd(cliargs CliArgs) {
 
 	resp, err := client.Do(req)
 	if err != nil {
-		fmt.Println("Errored when sending request to the server")
+		fmt.Println("Errored when sending request to the server", err)
 		return
 	}
 
